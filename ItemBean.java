@@ -16,6 +16,7 @@ public class ItemBean implements Serializable {
 
 	//引数有りコンストラクタ(ID、名前、価格)
 	public ItemBean(String id, String name, String phone, String email, String date) {
+		this.id =id;
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
