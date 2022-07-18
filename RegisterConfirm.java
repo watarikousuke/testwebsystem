@@ -39,16 +39,18 @@ public class RegisterConfirm extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		//requestオブジェクトからパラメータを取得（名前、電話番号、アドレスに書き換え）
+		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
+		String date = request.getParameter("date");
 
 		//コンソール表示
 		System.out.println("名前：電話番号：アドレス");
 		System.out.println(name + "：" + phone + "：" + email);
 
 		//商品オブジェクトの生成
-		ItemBean itemBean = new ItemBean(name, phone, email);
+		ItemBean itemBean = new ItemBean(id, name, phone, email, date);
 
 		//requestにセット
 		// request.setAttribute("itemBean", itemBean);
@@ -71,5 +73,5 @@ public class RegisterConfirm extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
+
 }
