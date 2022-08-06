@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.ItemBean;
+import beans.ContactBean;
 
 /**
  * Servlet implementation class RegisterConfirm
@@ -45,24 +46,44 @@ public class RegisterConfirm extends HttpServlet {
 		String email = request.getParameter("email");
 		String date = request.getParameter("date");
 
+		//エラーチェック
+		ArrayList<String> errorList = new ArrayList<String>();
+		if (name.isBlank()) {
+			errorList.add("名前が入力されていません");
+		}
+		if (phone.isBlank()) {
+			errorList.add("電話番号が入力されていません");
+		if (email.isBlank()) {
+			errorList.add("メールアドレスが入力されていません");
+		}
+
+		//エラーがある場合はページ転送
+				if(errorList.size() != 0) {
+					request.setAttribute("errorList", errorList);
+					request.getRequestDispatcher("/WEB-INF/Register.jsp")
+					.forward(request, response);
+					return;
+				}
+
 		//コンソール表示
 		System.out.println("名前：電話番号：アドレス");
 		System.out.println(name + "：" + phone + "：" + email);
 
 		//商品オブジェクトの生成
-		ItemBean itemBean = new ItemBean(id, name, phone, email, date);
+		ContactBean contactBean = new ContactBean(id, name, phone, email, date);
 
 		//requestにセット
-		// request.setAttribute("itemBean", itemBean);
+		// request.setAttribute("contactBean", contactBean);
 
 		//sessionの取得
 		HttpSession session = request.getSession();
 		//sessionに商品オブジェクトをセット
-		session.setAttribute("itemBean", itemBean);
+		session.setAttribute("contactBean", contactBean);
 
 		//ページの転送
 		request.getRequestDispatcher("/WEB-INF/RegisterConfirm.jsp")
 				.forward(request, response);
+		}
 	}
 
 	/**
@@ -71,6 +92,7 @@ public class RegisterConfirm extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 
