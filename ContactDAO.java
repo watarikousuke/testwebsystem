@@ -6,19 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import beans.ItemBean;
+import beans.ContactBean;
 
 public class ContactDAO extends ConnectBase {
 
 	/**
-	* 連絡先IDから連絡先(Item)Beanを取得
+	* 連絡先IDから連絡先ContactBeanを取得
 	* @param conn, contact_id　
-	* @return int ItemBean
+	* @return int ContactBean
 	* @throws SQLException
 	*/
-	public ItemBean getContact(Connection conn, String contact_id) throws SQLException {
+	public ContactBean getContact(Connection conn, String contact_id) throws SQLException {
 		//連絡先Beanの初期化
-		ItemBean itemBean = new ItemBean();
+		ContactBean contactBean = new ContactBean();
 
 		//連絡先IDで取得するSQL(編集しうまく取得できた)
 		final String sql = "select contact.id, contact.name, contact.phone, contact.email ,contact.date "
@@ -41,11 +41,11 @@ public class ContactDAO extends ConnectBase {
 					String contact_date = rs.getString("contact.date");
 
 					//取得した値をItemBeanにセット
-					itemBean.setId(contact_id);
-					itemBean.setName(contact_name);
-					itemBean.setPhone(contact_phone);
-					itemBean.setEmail(contact_email);
-					itemBean.setDate(contact_date);
+					contactBean.setId(contact_id);
+					contactBean.setName(contact_name);
+					contactBean.setPhone(contact_phone);
+					contactBean.setEmail(contact_email);
+					contactBean.setDate(contact_date);
 
 				}
 
@@ -58,18 +58,18 @@ public class ContactDAO extends ConnectBase {
 			throw e;
 		}
 
-		return itemBean;
+		return contactBean;
 	}
 
 	/**
 	* 全連絡先を取得
 	* @param con
-	* @return shainList
+	* @return contactList
 	* @throws SQLException
 	*/
-	public ArrayList<ItemBean> getAllContact(Connection con) throws SQLException {
+	public ArrayList<ContactBean> getAllContact(Connection con) throws SQLException {
 		//ArrayListの初期化
-		ArrayList<ItemBean> shainList = new ArrayList<ItemBean>();
+		ArrayList<ContactBean> contactList = new ArrayList<ContactBean>();
 
 		//連絡先IDで取得するSQL(最初取得にうまくいかなかったが編集し成功)
 		final String sql = "select *"
@@ -85,7 +85,7 @@ public class ContactDAO extends ConnectBase {
 				while (rs.next()) {
 
 					//社員Beanの初期化
-					ItemBean itemBean = new ItemBean();
+					ContactBean contactBean = new ContactBean();
 
 					//値を取得
 					String contact_name = rs.getString("contact.name");
@@ -93,14 +93,14 @@ public class ContactDAO extends ConnectBase {
 					String contact_email = rs.getString("contact.email");
 					String contact_date = rs.getString("contact.date");
 
-					//取得した値をItemBeanにセット
-					itemBean.setName(contact_name);
-					itemBean.setPhone(contact_phone);
-					itemBean.setEmail(contact_email);
-					itemBean.setDate(contact_date);
+					//取得した値をContactBeanにセット
+					contactBean.setName(contact_name);
+					contactBean.setPhone(contact_phone);
+					contactBean.setEmail(contact_email);
+					contactBean.setDate(contact_date);
 
-					//リストにItemBeanの追加
-					shainList.add(itemBean);
+					//リストにContactBeanの追加
+					contactList.add(contactBean);
 
 				}
 
@@ -113,7 +113,7 @@ public class ContactDAO extends ConnectBase {
 			throw e;
 		}
 
-		return shainList;
+		return contactList;
 	}
 
 }
