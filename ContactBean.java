@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class ItemBean implements Serializable {
+public class ContactBean implements Serializable {
 
 	private String id; //ID
 	private String name; //名前
@@ -11,11 +11,11 @@ public class ItemBean implements Serializable {
 	private String date; //登録日
 
 	//引数無しコンストラクタ(引数有りを作った場合は作る)
-	public ItemBean() {
+	public ContactBean() {
 	}
 
 	//引数有りコンストラクタ(ID、名前、価格)
-	public ItemBean(String id, String name, String phone, String email, String date) {
+	public ContactBean(String id, String name, String phone, String email, String date) {
 		this.id =id;
 		this.name = name;
 		this.phone = phone;
