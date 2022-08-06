@@ -1,0 +1,30 @@
+package model;
+
+import java.util.LinkedHashMap;
+
+import beans.ContactBean;
+
+public class ContactLogic {
+
+	//contactMap(HashMap)を属性値にする 原因：contactLogucを定義していないから
+	private LinkedHashMap<String, ContactBean> contactMap;
+
+	//コンストラクタ LinkedHashMap(key,商品オブジェクト)の初期化
+	public ContactLogic() {
+		this.contactMap = new LinkedHashMap<String, ContactBean>();
+	}
+
+	//idをキーにして連絡先登録
+		public void putContact(ContactBean contactBean) {
+			contactMap.put(contactBean.getId(), contactBean);
+		}
+
+	LinkedHashMap<String, ContactBean> getContactMap() {
+		return contactMap;
+	}
+
+	public void setContactMap(LinkedHashMap<String, ContactBean> contactMap) {
+		this.contactMap = contactMap;
+	}
+
+}
